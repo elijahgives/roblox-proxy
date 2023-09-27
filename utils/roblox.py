@@ -3,6 +3,7 @@ from fastapi import HTTPException
 
 
 async def get_user_data(username: str, session: aiohttp.ClientSession):
+    """Get information about a Roblox user by their username."""
     user_url = "https://users.roblox.com/v1/usernames/users"
     avatar_url = "https://thumbnails.roblox.com/v1/users/avatar-headshot"
 
@@ -27,6 +28,19 @@ async def get_user_data(username: str, session: aiohttp.ClientSession):
 
 
 async def get_user_groups(user_id: int, session: aiohttp.ClientSession):
+    """Get a list of a user's groups and their roles in them."""
     async with session.get(f"https://groups.roblox.com/v2/users/{user_id}/groups/roles") as response:
         data = await response.json()
         return data
+
+
+async def get_game_info(game_id: int, session: aiohttp.ClientSession):
+    """Get information on a game from its place ID."""
+    async with session.get(f"https://apis.roblox.com/universes/v1/places/{game_id}/universe") as response:
+        data = await response.json()
+        if data.get("universeId") is None:
+            raise HTTPException(status_code=404, detail="Not found")
+        universe_id = data.get("universeId")
+    async with session.get(f"https://games.roblox.com/v1/games?universeIds={universe_id}") as game_response:
+        data = (await game_response.json())["data"]
+        return data[0]

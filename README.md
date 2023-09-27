@@ -22,7 +22,7 @@ A simple Roblox proxy with FastAPI for getting some information.
 \
 **GET** `/users/{user_id}/groups`
 - `user_id`: the user ID of the Roblox user to list groups for.
-- #### Get the groups a Roblox user is in and their roles
+#### Get the groups a Roblox user is in and their roles
 ### Example response
 ```json
 {
@@ -41,5 +41,48 @@ A simple Roblox proxy with FastAPI for getting some information.
       }
     }
   ]
+}
+```
+\
+\
+**GET** `/games/{game_id}`
+- `game_id`: The place ID of the game to get information for.
+  - This is the same that would be in the URL roblox.com/games/1083480314 <- place ID
+#### Get information about a Roblox game.
+### Example response
+```json
+{
+  "id": 245662005,
+  "rootPlaceId": 606849621,
+  "name": "Jailbreak",
+  "description": "Our next update launches early October!\n🏆 Jailbreak is a 12 time award winning game where you can orchestrate a robbery or catch criminals!",
+  "sourceName": null,
+  "sourceDescription": null,
+  "creator": {
+    "id": 3059674,
+    "name": "Badimo",
+    "type": "Group",
+    "isRNVAccount": false,
+    "hasVerifiedBadge": true
+  },
+  "price": null,
+  "allowedGearGenres": [
+    "TownAndCity"
+  ],
+  "allowedGearCategories": [],
+  "isGenreEnforced": false,
+  "copyingAllowed": false,
+  "playing": 11128,
+  "visits": 6525453918,
+  "maxPlayers": 30,
+  "created": "2017-01-06T16:39:11.173Z",
+  "updated": "2023-09-27T16:41:23.0450258Z",
+  "studioAccessToApisAllowed": false,
+  "createVipServersAllowed": false,
+  "universeAvatarType": "MorphToR15",
+  "genre": "Town and City",
+  "isAllGenre": false,
+  "isFavoritedByUser": false,
+  "favoritedCount": 17954433
 }
 ```
