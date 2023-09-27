@@ -2,7 +2,7 @@
 A simple Roblox proxy with FastAPI for getting some information.
 
 ## Routes:
-`/get-user?username={username}`
+**GET** `/get-user?username={username}`
 - `username`: the username of the Roblox user to get info for.
 #### Get information on a roblox user.
 ### Example response
@@ -18,8 +18,9 @@ A simple Roblox proxy with FastAPI for getting some information.
   }
 }
 ```
-
-`/users/{user_id}/groups`
+\
+\
+**GET** `/users/{user_id}/groups`
 - `user_id`: the user ID of the Roblox user to list groups for.
 - #### Get the groups a Roblox user is in and their roles
 ### Example response
