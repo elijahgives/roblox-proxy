@@ -1,7 +1,7 @@
 import aiohttp
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from utils.roblox import fetch_user_data
+from utils.roblox import get_user_data, get_user_groups
 
 
 app = FastAPI()
@@ -19,5 +19,11 @@ app.add_middleware(
 @app.get("/get-user")
 async def get_user(username: str):
     async with aiohttp.ClientSession() as session:
-        user_data = await fetch_user_data(username, session)
+        user_data = await get_user_data(username, session)
         return user_data
+
+@app.get("/users/{user_id}/groups")
+async def get_groups(user_id: int):
+    async with aiohttp.ClientSession() as session:
+        groups = await get_user_groups(user_id, session)
+        return groups

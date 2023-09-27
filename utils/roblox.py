@@ -2,7 +2,7 @@ import aiohttp
 from fastapi import HTTPException
 
 
-async def fetch_user_data(username: str, session: aiohttp.ClientSession):
+async def get_user_data(username: str, session: aiohttp.ClientSession):
     user_url = "https://users.roblox.com/v1/usernames/users"
     avatar_url = "https://thumbnails.roblox.com/v1/users/avatar-headshot"
 
@@ -24,3 +24,9 @@ async def fetch_user_data(username: str, session: aiohttp.ClientSession):
     user_data['avatar'] = {'headshot': avatar_url}
 
     return user_data
+
+
+async def get_user_groups(user_id: int, session: aiohttp.ClientSession):
+    async with session.get(f"https://groups.roblox.com/v2/users/{user_id}/groups/roles") as response:
+        data = await response.json()
+        return data
