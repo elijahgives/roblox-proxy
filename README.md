@@ -1,5 +1,30 @@
 # Roblox Proxy
-A simple Roblox proxy with FastAPI for getting some information.
+A simple proxy with FastAPI for getting some information from Roblox.
+
+## Introduction
+
+This proxy was created to streamline getting information from Roblox, like by combining multiple data requests into one response; it has a CORS (cross-origin resource sharing) handler so you can use it on websites without an issue.
+
+## Installation and Setup
+To run the Roblox Proxy on your machine, follow these steps:
+
+### Clone the repository:
+
+```bash
+git clone https://github.com/elijahgives/roblox-proxy.git
+```
+
+### Install dependencies:
+
+```bash
+pip install -r requirements.txt
+````
+### Start the FastAPI development server:
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+This will launch the FastAPI application, and it will be accessible at http://localhost:8000.
 
 ## Routes:
 **GET** `/get-user?username={username}`
