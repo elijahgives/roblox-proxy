@@ -26,6 +26,8 @@ uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 This will launch the FastAPI application, and it will be accessible at http://localhost:8000.
 
+You can access documentation on the `/docs` route.
+
 ## Routes:
 **GET** `/get-user?username={username}`
 - `username`: the username of the Roblox user to get info for.
@@ -108,6 +110,15 @@ This will launch the FastAPI application, and it will be accessible at http://lo
   "genre": "Town and City",
   "isAllGenre": false,
   "isFavoritedByUser": false,
-  "favoritedCount": 17954433
+  "favoritedCount": 17954433,
+  "assets":{
+    "icon":"https://tr.rbxcdn.com/55c6576e0922e09ab8ca9f711793d942/512/512/Image/Png",
+    "thumbnails":[
+      "https://tr.rbxcdn.com/28e6eb80a496f35e1a26b490989fb77f/768/432/Image/Png",
+      "https://tr.rbxcdn.com/6cde04b76394d5111cc7b183944ded48/768/432/Image/Png",
+      "https://tr.rbxcdn.com/c5355209c329d245305864006855f220/768/432/Image/Png",
+      "https://tr.rbxcdn.com/32e3d35aec92dd968c4c0f5e823f84cc/768/432/Image/Png"
+    ]
+  }
 }
 ```

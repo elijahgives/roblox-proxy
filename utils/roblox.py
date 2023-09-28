@@ -42,5 +42,12 @@ async def get_game_info(game_id: int, session: aiohttp.ClientSession):
             raise HTTPException(status_code=404, detail="Not found")
         universe_id = data.get("universeId")
     async with session.get(f"https://games.roblox.com/v1/games?universeIds={universe_id}") as game_response:
-        data = (await game_response.json())["data"]
-        return data[0]
+        game_data = (await game_response.json())["data"][0].copy()
+    async with session.get(f"https://thumbnails.roblox.com/v1/games/icons?universeIds={game_data['id']}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false") as icon_response:
+        icon_data = (await icon_response.json())["data"][0]
+        game_data["assets"] = {"icon": icon_data["imageUrl"]}
+    async with session.get(f"https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds={game_data['id']}&countPerUniverse=50&defaults=true&size=768x432&format=Png&isCircular=false") as thumbnail_response:
+        thumbnail_data = (await thumbnail_response.json())["data"][0]
+        game_data["assets"]["thumbnails"] = [thumbnail["imageUrl"] for thumbnail in thumbnail_data["thumbnails"]]
+    return game_data
+
